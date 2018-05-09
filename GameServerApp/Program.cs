@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace GameServerApp
 {
@@ -61,13 +57,12 @@ namespace GameServerApp
 
                 Console.WriteLine("接收到{0}的连接", socket.RemoteEndPoint.ToString());
 
-                //ClientSocket获取当前连接的socket
-                ClientSocket clientSocket = new ClientSocket(socket);
-
                 //一个角色就相当于一个客户端连接
                 Role role = new Role();
-                role.m_ClientSocket = clientSocket;
 
+                //ClientSocket获取当前连接的socket
+                ClientSocket clientSocket = new ClientSocket(socket, role);
+                
                 //把角色添加到集合中
                 RoleManager.Instance.AllRole.Add(role);
             }
